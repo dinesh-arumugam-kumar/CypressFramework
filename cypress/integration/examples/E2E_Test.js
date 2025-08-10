@@ -10,11 +10,10 @@ describe('Handling Child Window, Frames & Calendar Suite', () => {
     })
 
     it("End to End Test", function () {
-        cy.visit("https://rahulshettyacademy.com/loginpagePractise/")
-        cy.get('#username').type(this.data.username)
-        cy.get('#password').type(this.data.password)
-        cy.get('#terms').check()
-        cy.get('#signInBtn').click()
+        const homePage = new HomePage()
+        homePage.goTo("https://rahulshettyacademy.com/loginpagePractise/")
+        homePage.login(this.data.username,this.data.password)
+        
         cy.get('.navbar-dark a').eq(0).should('contain', 'ProtoCommerce')
         cy.contains('Shop Name').should('be.visible')
         cy.get('app-card').should('have.length', 4)

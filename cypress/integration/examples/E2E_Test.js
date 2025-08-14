@@ -13,7 +13,8 @@ describe('Handling Child Window, Frames & Calendar Suite', () => {
     it("End to End Test", function () {
         const homePage = new HomePage()
         // const productPage = new ProductPage()
-        homePage.goTo("https://rahulshettyacademy.com/loginpagePractise/")
+        
+        homePage.goTo(Cypress.env('url')+"/loginpagePractise/")
         const ProductPage = homePage.login(this.data.username, this.data.password)
 
         ProductPage.pageValidation()
@@ -29,7 +30,7 @@ describe('Handling Child Window, Frames & Calendar Suite', () => {
         const CartPage = ProductPage.goToCart()
         CartPage.validateCart().then(function ({sum, total}) {
             expect(sum).to.be.lessThan(200000)
-            expect(sum).to.be.equal(total)
+            expect(sum).to.be.equal(total) 
         })
 
         const ConfirmationPage = CartPage.checkout()

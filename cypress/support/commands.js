@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("SubmitFormDetails",()=>{
+    cy.get('#country').type('Ind')
+        // Cypress.config('defaultCommandTimeout',8000)
+        cy.wait(1000)
+        cy.get('.suggestions ul li a').each($el => {
+            if ($el.text() === 'India') {
+                cy.wrap($el).click()
+            }
+        })
+    cy.get(".checkbox-primary input").check({ force: true })
+    cy.get("input[type='submit']").click()
+})
